@@ -1,0 +1,7 @@
+
+# Skip backups
+*.bak
+/backups
+
+# Environment variables file
+*.env

@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="google-site-verification" content="4WHCqwGlySm2m_phx58pXBY_MWsiv2LBxA23yBSdlOo" />
+<title>Renext — The All-in-One Text Styling Toolkit for Android</title>
+<meta name="description" content="Renext packs fonts, symbol decorations, case styles, repeaters, emoji conversion, neon text art and message encryption into one powerful Android app — free, ad-free, and fully offline." />
+<meta name="keywords" content="Renext, stylish text, font generator, text styler, unicode fonts, neon text, symbol decorator, text encryptor, Android app" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#12101c" />
+<meta property="og:title" content="Renext — The All-in-One Text Styling Toolkit for Android" />
+<meta property="og:description" content="Fonts, symbols, case styles, repeaters, emoji conversion, neon text art, and message encryption — Renext bundles it all into one free, ad-free, fully offline app." />
+<meta property="og:image" content="/asset/preview-10.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://mtfahimme.github.io/renext/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Renext — The All-in-One Text Styling Toolkit" />
+<meta name="twitter:description" content="A powerful, all-in-one text styling app for Android — fonts, symbols, repeaters, neon text and encryption, free and fully offline." />
+<meta name="twitter:image" content="/asset/preview-10.jpg" />
+
+<link rel="icon" href="/asset/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#12101c;
+    --bg-2:#181428;
+    --fg:#f5f3ff;
+    --muted:#a79ec4;
+    --muted-dim:#78708f;
+    --accent:#ffb454;   /* amber — the "stylised" highlight colour */
+    --accent-2:#8b7bf7; /* indigo — secondary / links */
+    --card:rgba(255,255,255,0.045);
+    --card-solid:#1c1830;
+    --border:rgba(255,255,255,0.09);
+    --shadow:0 20px 60px rgba(5,3,15,.45);
+    --radius:14px;
+    --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --display:'Sora', system-ui, sans-serif;
+    --body:'Inter', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;overflow-x:hidden;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:var(--body);
+    color:var(--fg);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .container{width:100%;max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  /* Ambient corner glow, anchored to the viewport (not the document) so it never
+     produces a hard seam partway down a tall page — it just sits behind everything. */
+  .bg-glow{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background:
+      radial-gradient(closest-side, rgba(139,123,247,.22), rgba(139,123,247,.22) 35%, transparent 100%) -10% -15% / 70vw 70vw no-repeat,
+      radial-gradient(closest-side, rgba(255,180,84,.16), rgba(255,180,84,.16) 35%, transparent 100%) 110% -10% / 60vw 60vw no-repeat,
+      var(--bg);
+  }
+
+  /* decorative glyph scatter — nods to the app's Board of stylish symbols. Confined to the hero so it never drifts over other sections. */
+  .glyphs{position:absolute;inset:0;pointer-events:none;z-index:0;}
+  .glyphs span{position:absolute;font-family:var(--mono);color:var(--accent-2);opacity:.12;font-size:26px;user-select:none;}
+
+  header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.3) blur(12px);background:color-mix(in oklab, var(--bg) 78%, transparent);border-bottom:1px solid var(--border);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;min-height:64px;gap:10px;flex-wrap:nowrap;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:-.01em;flex:none;}
+  .brand .mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-family:var(--display);font-weight:800;color:#181428;font-size:15px;box-shadow:var(--shadow);}
+  .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--border);background:var(--card);padding:7px 12px;border-radius:999px;font-size:12.5px;color:var(--muted);font-family:var(--mono);white-space:nowrap;flex:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;}
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;}
+  .pill .short{display:none;}
+
+  main{position:relative;z-index:1;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding-top:76px;padding-bottom:40px;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--accent);}
+  .wordmark{font-family:var(--display);font-weight:800;font-size:clamp(46px,7vw,74px);line-height:1;letter-spacing:-.02em;margin:0 0 6px;min-height:1.1em;}
+  .wordmark .cycle{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;transition:opacity .35s ease;}
+  .wordmark .cycle.swap{opacity:0;}
+  .h1-static{font-family:var(--display);font-weight:700;font-size:clamp(22px,3.2vw,32px);color:var(--fg);margin:0 0 20px;line-height:1.2;}
+  .sub{font-size:16px;line-height:1.65;color:var(--muted);max-width:520px;margin:0 0 30px;}
+  .sub b{color:var(--fg);font-weight:600;}
+
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px;}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:12px;border:1px solid var(--border);background:var(--card);font-weight:600;font-size:15px;box-shadow:var(--shadow);transition:transform .2s ease, box-shadow .2s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn.primary{background:linear-gradient(135deg,var(--accent),#ffcf85);color:#191325;border-color:transparent;}
+  .btn.ghost{color:var(--fg);}
+  .btn svg{width:18px;height:18px;flex:none;}
+
+  .btn.donate-link svg{color:var(--accent);}
+
+  .auto-note{display:none;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;color:var(--accent);background:rgba(255,180,84,.10);border:1px solid rgba(255,180,84,.25);padding:8px 12px;border-radius:9px;width:fit-content;margin:-8px 0 22px;}
+  .auto-note svg{width:15px;height:15px;flex:none;}
+  .auto-note.show{display:flex;}
+
+  .badges{display:flex;gap:9px;flex-wrap:wrap;color:var(--muted);}
+  .badge{display:flex;align-items:center;gap:7px;padding:6px 10px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:12.5px;font-family:var(--mono);}
+  .badge i{width:7px;height:7px;border-radius:50%;background:var(--accent-2);}
+
+  /* hero mock phone with live style samples */
+  .hero-visual{position:relative;display:flex;justify-content:center;}
+  .phone{width:250px;border-radius:34px;background:linear-gradient(160deg,#211c38,#161226);border:1px solid var(--border);box-shadow:var(--shadow);padding:14px;}
+  .phone .screen{background:var(--bg);border-radius:22px;padding:20px 16px;min-height:420px;display:flex;flex-direction:column;gap:14px;}
+  .phone .app-row{font-family:var(--mono);font-size:11px;color:var(--muted-dim);display:flex;justify-content:space-between;}
+  .sample{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:12px 14px;}
+  .sample .label{font-family:var(--mono);font-size:10.5px;color:var(--muted-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+  .sample .out{font-size:17px;color:var(--fg);word-break:break-word;}
+  .sample.accent .out{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;}
+
+  /* ---------- Sections shared ---------- */
+  .section{padding-top:64px;padding-bottom:64px;}
+  .section-head{max-width:600px;margin:0 0 36px;}
+  .section-head .eyebrow{margin-bottom:12px;}
+  .section-head h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,36px);margin:0 0 10px;letter-spacing:-.01em;}
+  .section-head p{color:var(--muted);margin:0;font-size:15.5px;line-height:1.6;}
+
+  /* ---------- Features ---------- */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .feat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;position:relative;overflow:hidden;transition:border-color .2s ease, transform .2s ease;}
+  .feat-card:hover{border-color:color-mix(in srgb, var(--accent-2) 45%, var(--border));transform:translateY(-3px);}
+  .feat-glyph{font-family:var(--mono);font-size:22px;color:var(--accent);display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9px;background:rgba(255,180,84,.10);margin-bottom:14px;}
+  .feat-card h3{font-family:var(--display);font-size:16.5px;margin:0 0 6px;font-weight:700;}
+  .feat-card p{font-size:13.8px;line-height:1.55;color:var(--muted);margin:0 0 10px;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--border);padding:3px 8px;border-radius:999px;}
+  .feat-card.soon{border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;}
+  .feat-card.soon .feat-glyph{background:rgba(139,123,247,.12);color:var(--accent-2);}
+
+  /* ---------- Screenshots carousel ---------- */
+  .card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);padding:16px;backdrop-filter:blur(10px);}
+  .carousel{position:relative;overflow:hidden;border-radius:16px;user-select:none;}
+  .track{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1);will-change:transform;touch-action:pan-y;}
+  .slide{flex:0 0 100%;padding:8px;display:flex;justify-content:center;}
+  .frame{border-radius:20px;overflow:hidden;background:linear-gradient(150deg,#241f3d,#140f22);border:1px solid var(--border);position:relative;aspect-ratio:9/16;box-shadow:0 12px 40px rgba(0,0,0,.35);max-height:520px;width:100%;margin:0 auto;max-width:280px;}
+  .frame img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;}
+  .frame .placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--muted);font-family:var(--mono);font-size:12.5px;text-align:center;padding:24px;line-height:1.6;background:repeating-linear-gradient(135deg, rgba(255,255,255,.03) 0 10px, transparent 10px 20px);}
+  .frame .placeholder b{color:var(--accent);font-size:26px;}
+
+  .dots{display:flex;gap:8px;justify-content:center;padding:16px 8px 0;}
+  .dot{width:8px;height:8px;border-radius:999px;background:color-mix(in srgb, var(--muted) 40%, transparent);border:1px solid var(--border);transition:all .3s cubic-bezier(.4,0,.2,1);cursor:pointer;}
+  .dot:hover{transform:scale(1.2);}
+  .dot.active{width:26px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-color:transparent;}
+
+  .navbtn{position:absolute;top:50%;translate:0 -50%;background:color-mix(in srgb, var(--bg) 78%, transparent);border:1px solid var(--border);backdrop-filter:blur(8px);padding:11px;border-radius:11px;cursor:pointer;display:grid;place-items:center;transition:all .2s ease;z-index:10;}
+  .navbtn:hover{background:color-mix(in srgb, var(--bg) 90%, transparent);transform:translateY(-50%) scale(1.05);}
+  .navbtn svg{width:19px;height:19px;}
+  .prev{left:16px;} .next{right:16px;}
+
+  .kbd{font-family:var(--mono);border:1px solid var(--border);padding:3px 7px;border-radius:6px;background:var(--card);font-size:11.5px;color:var(--muted);}
+  .tip{text-align:center;margin-top:12px;color:var(--muted-dim);font-size:12.5px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;}
+
+  /* ---------- About / Support ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;}
+  .info-card h3{font-family:var(--display);font-size:18px;margin:0 0 12px;font-weight:700;}
+  .info-card p{font-size:14.5px;line-height:1.7;color:var(--muted);margin:0 0 10px;}
+  .info-card p:last-child{margin-bottom:0;}
+  .info-card ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.9;}
+  .info-card b{color:var(--fg);}
+
+  footer{border-top:1px solid var(--border);padding:32px 0 40px;color:var(--muted-dim);background:color-mix(in srgb, var(--card) 50%, transparent);position:relative;z-index:1;}
+  .foot-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;font-size:13px;}
+
+  @media (max-width:860px){
+    .container{padding:0 24px;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{margin-top:36px;}
+    .phone{width:210px;}
+    .feat-grid{grid-template-columns:repeat(2,1fr);}
+    .split{grid-template-columns:1fr;}
+    .section{padding-top:72px;padding-bottom:56px;}
+  }
+  @media (max-width:420px){
+    .brand{font-size:16px;gap:8px;}
+    .brand .mark{width:28px;height:28px;font-size:13px;}
+    .pill{font-size:11px;padding:6px 10px;gap:6px;}
+    .pill .full{display:none;}
+    .pill .short{display:inline;}
+  }
+  @media (max-width:560px){
+    .container{padding:0 20px;}
+    .navbtn{display:none;}
+    .feat-grid{grid-template-columns:1fr;}
+    .hero{padding-top:60px;padding-bottom:28px;}
+    .section{padding-top:64px;padding-bottom:48px;}
+    .frame{height:56vh;min-height:380px;max-height:none;}
+    .feat-card{padding:20px;}
+    .info-card{padding:22px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .btn,.feat-card,.dot,.navbtn,.track{transition:none;}
+  }
+  @media (max-height:500px) and (orientation:landscape){
+    .nav{min-height:52px;padding-top:10px;padding-bottom:10px;}
+    .hero{padding-top:96px;}
+  }
+</style>
+</head>
+<body>
+<div class="bg-glow" aria-hidden="true"></div>
+
+<header>
+  <div class="container nav">
+    <div class="brand"><span class="mark">R</span> Renext</div>
+    <div class="pill" id="headerPill"><span class="dot"></span><span class="full">Free • Offline • No ads</span><span class="short">Free • No ads</span></div>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero container">
+    <div class="glyphs" aria-hidden="true">
+      <span style="top:6%;left:2%;">✦</span>
+      <span style="top:14%;left:92%;font-size:34px;">⟡</span>
+      <span style="top:70%;left:1%;font-size:20px;">◈</span>
+      <span style="top:80%;left:94%;">❖</span>
+      <span style="top:46%;left:50%;font-size:16px;">∞</span>
+      <span style="top:4%;left:46%;font-size:18px;">❀</span>
+    </div>
+    <div class="hero-grid" style="position:relative;z-index:1;">
+      <div>
+        <p class="eyebrow">Text styler for Android</p>
+        <h1 class="wordmark"><span class="cycle" id="cycleWord">Renext</span></h1>
+        <p class="h1-static">Type once. Style it a hundred ways.</p>
+        <p class="sub">Renext is a simple, powerful text styling tool for <b>social media, messages, and more</b> — fonts, symbol decorations, repeaters, neon graphics and a text encryptor, all in one lightweight app.</p>
+        <div class="cta">
+          <a class="btn primary" id="downloadBtn" href="/asset/Renext.apk" download>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1 1 0 0 1 1 1v9.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4A1 1 0 0 1 8.293 11.293L10.586 13.586V4a1 1 0 0 1 1-1Zm-8 14a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z"/></svg>
+            <span>Download APK</span>
+          </a>
+          <a class="btn ghost" href="#screens">
+            <span>See screenshots</span>
+          </a>
+          <a class="btn ghost donate-link" href="donate.html">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.716-4.35-9.428-8.06C.86 10.42 1.2 6.9 4.1 5.2A5.4 5.4 0 0 1 12 7.02 5.4 5.4 0 0 1 19.9 5.2c2.9 1.7 3.24 5.22 1.53 7.74C18.716 16.65 12 21 12 21Z"/></svg>
+            <span>Donate</span>
+          </a>
+        </div>
+        <p class="auto-note" id="autoDownloadNote">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Your download is starting automatically…</span>
+        </p>
+        <div class="badges">
+          <div class="badge"><i></i>No ads</div>
+          <div class="badge"><i></i>No tracking</div>
+          <div class="badge"><i></i>Works offline</div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="phone">
+          <div class="screen">
+            <div class="app-row"><span>Styler</span><span>Font</span></div>
+            <div class="sample">
+              <div class="label">Input</div>
+              <div class="out">Good vibes only</div>
+            </div>
+            <div class="sample accent">
+              <div class="label">Fraktur</div>
+              <div class="out">𝕲𝖔𝖔𝖉 𝖛𝖎𝖇𝖊𝖘 𝖔𝖓𝖑𝖞</div>
+            </div>
+            <div class="sample">
+              <div class="label">Decorated</div>
+              <div class="out">彡Good vibes only彡</div>
+            </div>
+            <div class="sample">
+              <div class="label">Circled</div>
+              <div class="out">Ⓖⓞⓞⓓ ⓥⓘⓑⓔⓢ ⓞⓝⓛⓨ</div>
+            </div>
+            <div class="sample accent">
+              <div class="label">Repeater</div>
+              <div class="out">G~o~o~d</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="section container" id="features">
+    <div class="section-head">
+      <p class="eyebrow">What's inside</p>
+      <h2>A growing toolkit, all in one app</h2>
+      <p>Everything runs on-device — nothing you type ever leaves your phone. New tools keep getting added.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-glyph">𝕬</div>
+        <h3>Styler</h3>
+        <p>Transform your text with case conversion, prefix/suffix decorations, a symbol board, and dozens of unicode fonts.</p>
+        <div class="chips">
+          <span class="chip">Case</span><span class="chip">Decorations</span><span class="chip">Board</span><span class="chip">Font</span>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-glyph">↻</div>
+        <h3>Repeater</h3>
+        <p>Apply repeating text styles for eye-catching bios, captions and usernames.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-glyph">☺</div>
+        <h3>Text to Emoji</h3>
+        <p>Turn words into matching emoji, instantly.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-glyph">✺</div>
+        <h3>Neon Text</h3>
+        <p>Render glowing, colorized text as a PNG you can share anywhere.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-glyph">⚿</div>
+        <h3>Encryptor</h3>
+        <p>Encrypt and decrypt text for messages you'd rather keep private.</p>
+      </div>
+      <div class="feat-card soon">
+        <div class="feat-glyph">＋</div>
+        <h3>More on the way</h3>
+        <p>New styling tools are added over time — this is just the start.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENSHOTS ============ -->
+  <section class="section container" id="screens">
+    <div class="section-head">
+      <p class="eyebrow">See it in action</p>
+      <h2>A quick look at Renext</h2>
+      <p>Live screenshots from the app.</p>
+    </div>
+    <div class="card">
+      <div class="carousel" id="carousel" aria-roledescription="carousel" aria-label="App screenshots">
+        <button class="navbtn prev" id="prevBtn" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="navbtn next" id="nextBtn" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <div class="track" id="track" aria-live="polite"></div>
+      </div>
+      <div class="dots" id="dots" role="tablist" aria-label="Slide indicators"></div>
+      <div class="tip"><span>Use</span><span class="kbd">←</span><span class="kbd">→</span><span>or swipe to browse</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT / SUPPORT ============ -->
+  <section class="section container" id="about">
+    <div class="section-head">
+      <p class="eyebrow">Support &amp; info</p>
+      <h2>About Renext</h2>
+      <p>What the app does, and how you can help keep it free.</p>
+    </div>
+    <div class="split">
+      <div class="info-card">
+        <h3>What it does</h3>
+        <p><b>Renext</b> is a simple and powerful text styling tool designed to help you quickly format and decorate text for social media, messages, and more.</p>
+        <ul>
+          <li>Multiple text styles</li>
+          <li>Fast and lightweight</li>
+          <li>Easy-to-use interface</li>
+          <li>No ads, no tracking</li>
+          <li>Works fully offline</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Support development</h3>
+        <p>Renext is completely free, with no ads, no tracking, and it works fully offline. If it's useful to you, consider supporting its development.</p>
+        <p>Your support helps keep the app updated, improve features, and maintain a smooth experience for everyone. Thank you ❤️</p>
+        <a class="btn primary" style="margin-top:14px;" href="donate.html">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M12 21s-6.716-4.35-9.428-8.06C.86 10.42 1.2 6.9 4.1 5.2A5.4 5.4 0 0 1 12 7.02 5.4 5.4 0 0 1 19.9 5.2c2.9 1.7 3.24 5.22 1.53 7.74C18.716 16.65 12 21 12 21Z"/></svg>
+          <span>Donate</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot-row">
+    <div>© <span id="year"></span> Renext. All rights reserved.</div>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <a href="mailto:mt.fahim@outlook.com" class="pill">Contact</a>
+      <a href="#" class="pill">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------- Auto-download when opened from the app ----------
+   Link the app's "Download update" action to:
+     https://mtfahimme.github.io/renext/?download=1
+   (or use "#download" instead of the query param — both work.)
+   On load, if that flag is present, the page auto-clicks the
+   Download APK button so the download starts immediately. */
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const shouldAutoDownload = params.get('download') === '1' || window.location.hash === '#download';
+  if(!shouldAutoDownload) return;
+
+  const btn = document.getElementById('downloadBtn');
+  const note = document.getElementById('autoDownloadNote');
+  if(!btn) return;
+
+  setTimeout(() => {
+    btn.click();
+    if(note) note.classList.add('show');
+  }, 400);
+})();
+
+/* ---------- Hero cycling wordmark (mirrors the app's Font feature) ---------- */
+(function(){
+  const styles = ['Renext','𝐑𝐞𝐧𝐞𝐱𝐭','𝑅𝑒𝑛𝑒𝑥𝑡','𝓡𝓮𝓷𝓮𝔁𝓽','𝕽𝖊𝖓𝖊𝖝𝖙','Ｒｅｎｅｘｔ','Ⓡⓔⓝⓔⓧⓣ','𝚁𝚎𝚗𝚎𝚡𝚝'];
+  const el = document.getElementById('cycleWord');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced) return;
+  let i = 0;
+  setInterval(() => {
+    el.classList.add('swap');
+    setTimeout(() => {
+      i = (i + 1) % styles.length;
+      el.textContent = styles[i];
+      el.classList.remove('swap');
+    }, 350);
+  }, 2200);
+})();
+
+/* ---------- Screenshot carousel ---------- */
+/* To add more screenshots later, just extend this array —
+   everything else (slides, dots, nav) builds itself. */
+(function(){
+  const SCREENSHOTS = [
+    { src: 'asset/screenshots/home.jpg', alt: 'Renext – Home screen' },
+    { src: 'asset/screenshots/styles.jpg', alt: 'Renext – Styler screen' },
+    { src: 'asset/screenshots/font.jpg', alt: 'Renext – Font styles' },
+    { src: 'asset/screenshots/repeater.jpg', alt: 'Renext – Repeater screen' },
+    { src: 'asset/screenshots/texttoemoji.jpg', alt: 'Renext – Text to emoji' },
+    { src: 'asset/screenshots/encryptor.jpg', alt: 'Renext – Encryptor' }
+  ];
+
+  const track = document.getElementById('track');
+  const dotsWrap = document.getElementById('dots');
+  const prev = document.getElementById('prevBtn');
+  const next = document.getElementById('nextBtn');
+  const carousel = document.getElementById('carousel');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  SCREENSHOTS.forEach((shot, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.innerHTML = `<div class="frame">
+        <img loading="${i === 0 ? 'eager' : 'lazy'}" src="${shot.src}" alt="${shot.alt}" draggable="false"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder" style="display:none;"><b>▤</b>Add <code>${shot.src}</code><br>to show this screenshot</div>
+      </div>`;
+    track.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('role','tab');
+    dot.setAttribute('aria-label','Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  const slides = Array.from(track.children);
+  const dots = Array.from(dotsWrap.children);
+  let index = 0, autoTimer = null, locked = false;
+  const autoMs = 4200;
+
+  function update(){
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((d,i) => d.classList.toggle('active', i === index));
+    carousel.setAttribute('aria-label', `Screenshot ${index + 1} of ${slides.length}`);
+  }
+  function go(i, userInitiated = true){
+    if(locked || slides.length === 0) return;
+    locked = true;
+    index = (i + slides.length) % slides.length;
+    update();
+    setTimeout(() => locked = false, 420);
+    if(userInitiated) restartAuto();
+  }
+  function nextSlide(){ go(index + 1); }
+  function prevSlide(){ go(index - 1); }
+
+  next.addEventListener('click', nextSlide);
+  prev.addEventListener('click', prevSlide);
+
+  document.addEventListener('keydown', (e) => {
+    if(e.target.closest('.carousel')){
+      if(e.key === 'ArrowRight'){ e.preventDefault(); nextSlide(); }
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); prevSlide(); }
+    }
+  });
+
+  let startX = 0, startY = 0, dx = 0, dy = 0, dragging = false, moved = false;
+  function onStart(e){
+    dragging = true; moved = false;
+    const t = e.touches ? e.touches[0] : e;
+    startX = t.clientX; startY = t.clientY;
+    track.style.transition = 'none';
+    stopAuto();
+  }
+  function onMove(e){
+    if(!dragging) return;
+    const t = e.touches ? e.touches[0] : e;
+    dx = t.clientX - startX; dy = t.clientY - startY;
+    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10){
+      e.preventDefault();
+      moved = true;
+      track.style.transform = `translateX(calc(-${index * 100}% + ${dx}px))`;
+    }
+  }
+  function onEnd(){
+    if(!dragging) return;
+    track.style.transition = '';
+    dragging = false;
+    const threshold = window.innerWidth * 0.15;
+    if(moved && Math.abs(dx) > threshold){ dx > 0 ? prevSlide() : nextSlide(); }
+    else{ update(); }
+    dx = 0; dy = 0; moved = false;
+    if(!prefersReduced) startAuto();
+  }
+  carousel.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+  carousel.addEventListener('touchstart', onStart, { passive: true });
+  carousel.addEventListener('touchmove', onMove, { passive: false });
+  carousel.addEventListener('touchend', onEnd);
+  carousel.addEventListener('contextmenu', e => e.preventDefault());
+
+  function startAuto(){ if(prefersReduced) return; stopAuto(); autoTimer = setInterval(() => go(index + 1, false), autoMs); }
+  function stopAuto(){ if(autoTimer) clearInterval(autoTimer); autoTimer = null; }
+  function restartAuto(){ stopAuto(); setTimeout(startAuto, 1000); }
+
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', () => !prefersReduced && startAuto());
+  carousel.addEventListener('focusin', stopAuto);
+  carousel.addEventListener('focusout', () => !prefersReduced && startAuto());
+
+  if('IntersectionObserver' in window){
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { entry.isIntersecting ? (!prefersReduced && startAuto()) : stopAuto(); });
+    }, { threshold: 0.5 });
+    observer.observe(carousel);
+  } else if(!prefersReduced){ startAuto(); }
+
+  update();
+})();
+</script>
+</body>
+</html>
