@@ -1,7 +1,7 @@
 {
   "version_code": 2,
   "version_name": "1.0.1",
-  "size": "5.67 MB",
+  "size": "5.7 MB",
   "download_url": "https://mtFAHIMme.github.io/renext/asset/Renext.apk",
   "site_download_url": "https://mtFAHIMme.github.io/renext/#download",
   "action": "open_site", // "open_site": (open the "site download url" to the browser), "download": (directly download with in-app downloader) (app default action: "download")
