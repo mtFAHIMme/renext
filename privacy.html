@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy — Renext</title>
+<meta name="description" content="Renext's privacy policy: the app collects no data, processes nothing, and sends nothing online. Internet access is used only for update checks and loading the developer's profile image." />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#12101c" />
+<meta property="og:title" content="Privacy Policy — Renext" />
+<meta property="og:description" content="Renext collects no data and works fully offline. Here's exactly what the app's internet permission is used for." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://mtfahimme.github.io/renext/privacy.html" />
+
+<link rel="icon" href="/asset/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#12101c; --fg:#f5f3ff; --muted:#a79ec4; --muted-dim:#78708f;
+    --accent:#ffb454; --accent-2:#8b7bf7;
+    --card:rgba(255,255,255,0.045); --border:rgba(255,255,255,0.09);
+    --shadow:0 20px 60px rgba(5,3,15,.45); --radius:14px;
+    --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --display:'Sora', system-ui, sans-serif;
+    --body:'Inter', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;overflow-x:hidden;}
+  html,body{height:100%;}
+  body{margin:0;font-family:var(--body);color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  .container{width:100%;max-width:760px;margin:0 auto;padding:0 32px;}
+
+  .bg-glow{position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(closest-side, rgba(139,123,247,.18), rgba(139,123,247,.18) 35%, transparent 100%) -10% -15% / 65vw 65vw no-repeat,
+      radial-gradient(closest-side, rgba(255,180,84,.14), rgba(255,180,84,.14) 35%, transparent 100%) 110% 0% / 55vw 55vw no-repeat,
+      var(--bg);
+  }
+
+  header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.3) blur(12px);background:color-mix(in oklab, var(--bg) 78%, transparent);border-bottom:1px solid var(--border);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;min-height:64px;gap:10px;flex-wrap:nowrap;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:18px;flex:none;}
+  .brand .mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:800;color:#181428;font-size:15px;box-shadow:var(--shadow);}
+  .back{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12.5px;color:var(--muted);border:1px solid var(--border);background:var(--card);padding:7px 12px;border-radius:999px;white-space:nowrap;flex:none;}
+  .back svg{width:13px;height:13px;flex:none;}
+  .back:hover{color:var(--fg);}
+
+  main{position:relative;z-index:1;}
+  .hero{padding-top:76px;padding-bottom:8px;}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--accent);}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;margin:0 0 14px;}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .meta span{font-family:var(--mono);font-size:12px;color:var(--muted-dim);border:1px solid var(--border);background:var(--card);padding:5px 10px;border-radius:999px;}
+  .lede{font-size:16px;line-height:1.7;color:var(--muted);max-width:600px;margin:22px 0 0;}
+  .lede b{color:var(--fg);font-weight:600;}
+
+  .section{padding-top:64px;padding-bottom:72px;}
+  .policy{display:flex;flex-direction:column;gap:14px;}
+  .policy-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px;}
+  .policy-card .num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em;margin:0 0 8px;}
+  .policy-card h2{font-family:var(--display);font-size:19px;font-weight:700;margin:0 0 12px;}
+  .policy-card p{font-size:14.5px;line-height:1.75;color:var(--muted);margin:0 0 12px;}
+  .policy-card p:last-child{margin-bottom:0;}
+  .policy-card ul{margin:0 0 12px;padding-left:20px;color:var(--muted);font-size:14.5px;line-height:1.85;}
+  .policy-card ul:last-child{margin-bottom:0;}
+  .policy-card li b, .policy-card p b{color:var(--fg);font-weight:600;}
+  .policy-card code{font-family:var(--mono);font-size:13px;background:rgba(255,255,255,.06);border:1px solid var(--border);padding:2px 6px;border-radius:5px;color:var(--accent);}
+
+  .highlight{border-color:color-mix(in srgb, var(--accent) 35%, var(--border));background:linear-gradient(135deg, rgba(255,180,84,.07), rgba(139,123,247,.05));}
+
+  .contact-box{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:8px;}
+  .mail-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:9px;background:linear-gradient(135deg,var(--accent),#ffcf85);color:#191325;font-weight:600;font-size:13.5px;}
+  .mail-btn svg{width:15px;height:15px;}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 36px;color:var(--muted-dim);font-size:13px;}
+  .foot-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;}
+  .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--border);background:var(--card);padding:7px 12px;border-radius:999px;font-size:12.5px;color:var(--muted);font-family:var(--mono);}
+
+  @media (max-width:640px){
+    .container{
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+    .policy-card{padding:20px;}
+  }
+  @media (max-height:500px) and (orientation:landscape){
+    .nav{min-height:52px;padding-top:10px;padding-bottom:10px;}
+    .hero{padding-top:96px;}
+  }
+</style>
+</head>
+<body>
+<div class="bg-glow" aria-hidden="true"></div>
+
+<header>
+  <div class="container nav">
+    <div class="brand"><span class="mark">R</span> Renext</div>
+    <a class="back" href="index.html">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to app
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="hero container">
+    <p class="eyebrow">Privacy Policy</p>
+    <h1>Your privacy, in plain terms</h1>
+    <div class="meta">
+      <span>Effective: August 8, 2026</span>
+      <span>Applies to: Renext for Android</span>
+    </div>
+    <p class="lede">The short version: <b>Renext does not collect, store, or transmit any of your data.</b> Everything you type stays on your device. This page explains exactly what that means, and the one narrow purpose for which the app connects to the internet at all.</p>
+  </section>
+
+  <section class="section container">
+    <div class="policy">
+
+      <div class="policy-card highlight">
+        <p class="num">SUMMARY</p>
+        <h2>Renext is a fully offline, data-free app</h2>
+        <ul>
+          <li>Renext does <b>not</b> collect any personal or usage data.</li>
+          <li>Renext does <b>not</b> process the text you type in any way beyond displaying it back to you, styled.</li>
+          <li>Renext does <b>not</b> send anything you type, or any other information, over the internet.</li>
+          <li>Renext does <b>not</b> save or store anything you type — locally or otherwise — once the app is closed.</li>
+          <li>Renext contains <b>no ads, no analytics, and no third-party tracking SDKs.</b></li>
+        </ul>
+      </div>
+
+      <div class="policy-card">
+        <p class="num">01 — INFORMATION WE COLLECT</p>
+        <h2>None</h2>
+        <p>Renext does not require you to create an account, sign in, or provide any personal information to use the app. Every feature — Styler, Repeater, Text to Emoji, Neon Text, and the Encryptor — runs entirely on your device. No text, file, or usage pattern is read, logged, or transmitted by the app.</p>
+      </div>
+
+      <div class="policy-card">
+        <p class="num">02 — HOW YOUR TEXT IS HANDLED</p>
+        <h2>Processed locally, never stored</h2>
+        <p>Any text you enter into Renext is transformed only in your device's memory, purely to show you the styled result. It is not written to any file, database, or cache that persists after you leave the screen, and it is never uploaded anywhere. When you close the app, that text is gone.</p>
+      </div>
+
+      <div class="policy-card">
+        <p class="num">03 — WHY RENEXT ASKS FOR INTERNET ACCESS</p>
+        <h2>Internet permission: what it's actually used for</h2>
+        <p>Renext requests the Android <code>INTERNET</code> permission for exactly two purposes, and nothing else:</p>
+        <ul>
+          <li><b>Checking for app updates</b> — so the app can let you know when a newer version is available.</li>
+          <li><b>Loading the developer's profile picture</b> shown on the About screen, fetched from GitHub using the Glide image-loading library.</li>
+        </ul>
+        <p>This permission is never used to send your text, your device identifiers, or any other personal data anywhere. If you'd prefer, you can revoke internet access for Renext in your device settings — the core text-styling features will continue to work normally offline.</p>
+      </div>
+
+      <div class="policy-card">
+        <p class="num">04 — THIRD-PARTY SERVICES</p>
+        <h2>GitHub (image loading only)</h2>
+        <p>The only external service Renext ever contacts is GitHub, solely to load the developer's profile image. Like any standard web request, this may cause GitHub's own servers to see basic technical information inherent to how the internet works (such as your IP address and request timestamp) — this is standard for any request made over HTTP, and Renext has no control over, and does not access, any data GitHub logs on its end. Renext does not integrate any advertising network, analytics SDK, or other third-party service.</p>
+      </div>
+
+      <div class="policy-card">
+        <p class="num">05 — DEVICE PERMISSIONS</p>
+        <h2>What Renext asks for, and why</h2>
+        <p>Renext only requests the minimum permissions needed for it to function:</p>
+        <ul>
+          <li><b>Internet access</b> — for update checks and loading the developer's profile picture, as described above.</li>
+        </ul>
+        <p>Renext does not request access to your contacts, location, camera, microphone, storage of personal files, or any other sensitive permission.</p>
+      </div>
+
+      <div class="policy-card">
+        <p class="num">06 — CHILDREN'S PRIVACY</p>
+        <h2>Safe for all ages</h2>
+        <p>Because Renext collects no data of any kind from any user, it does not knowingly or unknowingly collect personal information from children. The app is safe for users of any age with respect to data privacy.</p>
+      </div>
+
+      <div class="policy-card">
+        <p class="num">07 — CHANGES TO THIS POLICY</p>
+        <h2>We'll post updates here</h2>
+        <p>If Renext's data practices ever change — for example, if a future feature were to require new permissions — this page will be updated first, along with the "Effective" date at the top, before that change ships in an app update.</p>
+      </div>
+
+      <div class="policy-card">
+        <p class="num">08 — CONTACT</p>
+        <h2>Questions about this policy</h2>
+        <p>If anything here is unclear, or you have questions about how Renext handles (or, in this case, doesn't handle) your data, reach out directly.</p>
+        <div class="contact-box">
+          <a class="mail-btn" href="mailto:mt.fahim@outlook.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Email the developer
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot-row">
+    <div>© <span id="year"></span> Renext. All rights reserved.</div>
+    <a href="mailto:mt.fahim@outlook.com" class="pill">Contact</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
