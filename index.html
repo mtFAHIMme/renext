@@ -457,6 +457,30 @@ document.getElementById('year').textContent = new Date().getFullYear();
   }, 400);
 })();
 
+/* ---------- Download button with version ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("downloadBtn");
+  if (!btn) return;
+
+  const span = btn.querySelector("span"); // <span>Download APK</span>
+  if (!span) return;
+
+  fetch("https://mtfahimme.github.io/renext/update.json")
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load");
+      return res.json();
+    })
+    .then(data => {
+      if (data.version_name) {
+        span.textContent = `Download APK (v${data.version_name})`;
+      }
+      // If version_name is not present, "Download APK" will be retained.
+    })
+    .catch(() => {
+      // If the fetch fails for any reason, the current text remains unchanged.
+    });
+});
+
 /* ---------- Hero cycling wordmark (mirrors the app's Font feature) ---------- */
 (function(){
   const styles = ['Renext','𝐑𝐞𝐧𝐞𝐱𝐭','𝑅𝑒𝑛𝑒𝑥𝑡','𝓡𝓮𝓷𝓮𝔁𝓽','𝕽𝖊𝖓𝖊𝖝𝖙','Ｒｅｎｅｘｔ','Ⓡⓔⓝⓔⓧⓣ','𝚁𝚎𝚗𝚎𝚡𝚝'];
