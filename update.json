@@ -1,11 +1,12 @@
 {
-  "version_code": 3,
-  "version_name": "1.0.3",
-  "size": "5.7 MB",
-  "download_url": "https://mtFAHIMme.github.io/renext/asset/Renext.apk",
-  "site_download_url": "https://mtFAHIMme.github.io/renext/#download",
-  "action": "open_site", // "open_site": open the "site download url" to the browser; "download": directly download with in-app downloader (app default action: "download")
-  "changelog": "• Added new options in Neon Text Generator\n• Fixed Image sharing problem\n• Fixed old font preview\n• Improved TextEncryptor (supports old decryption)\n• Optimized Styler loading\n• Fixed some small bugs",
-  "force_update": false,
-  "release_date": "2026-08-11"
+    "version_code": 3,
+    "version_name": "1.0.3",
+    "size": "5.7 MB",
+    "download_url": "https://mtFAHIMme.github.io/renext/asset/Renext.apk",
+    "site_download_url": "https://mtFAHIMme.github.io/renext/#download",
+    "action": "open_site",
+    "action_description": "open_site: open the site_download_url to the browser; download: directly download with in-app downloader (app default action: download)",
+    "changelog": "• Added new options in Neon Text Generator\n• Fixed Image sharing problem\n• Fixed old font preview\n• Improved TextEncryptor (supports old decryption)\n• Optimized Styler loading\n• Fixed some small bugs",
+    "force_update": false,
+    "release_date": "2026-08-12"
 }
