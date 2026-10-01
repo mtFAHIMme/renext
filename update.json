@@ -1,12 +1,12 @@
 {
-    "version_code": 3,
-    "version_name": "1.0.3",
-    "size": "5.7 MB",
-    "download_url": "https://mtFAHIMme.github.io/renext/asset/Renext.apk",
+    "version_code": 4,
+    "version_name": "1.1.0",
+    "size": "3.3 MB",
+    "download_url": "https://github.com/mtFAHIMme/renext/releases/latest/download/Renext.apk",
     "site_download_url": "https://mtFAHIMme.github.io/renext/#download",
     "action": "open_site",
     "action_description": "open_site: open the site_download_url to the browser; download: directly download with in-app downloader (app default action: download)",
-    "changelog": "• Added new options in Neon Text Generator\n• Fixed Image sharing problem\n• Fixed old font preview\n• Improved TextEncryptor (supports old decryption)\n• Optimized Styler loading\n• Fixed some small bugs",
+    "changelog": "• Added support for Android 5 (previously required Android 8)\n• Added SAF-based file saving\n• Added a Dynamic Color toggle option\n• Added options to change the KDF algorithm and iteration count in TextEncryptor\n• Removed many duplicate fonts\n• Fixed conflicts between the Drawer and Back icons\n• Improved performance\n• Fixed several minor bugs",
     "force_update": false,
-    "release_date": "2026-08-12"
+    "release_date": "2026-10-1"
 }

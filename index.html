@@ -6,45 +6,13 @@
 <meta name="google-site-verification" content="4WHCqwGlySm2m_phx58pXBY_MWsiv2LBxA23yBSdlOo" />
 <title>Renext — The All-in-One Text Styling Toolkit for Android</title>
 <meta name="description" content="Renext (Renew your Text) is a free, ad-free Android text styling toolkit with stylish fonts, symbols, case conversion, text repeater, emoji conversion, neon text art and message encryption. Works fully offline." />
-<meta name="keywords" content="
-Renext,
-Renext app,
-Renext stylish app,
-Renext Android app,
-Renew your Text,
-mtApps,
-text styling app,
-stylish text,
-stylish text generator,
-font generator,
-fancy text generator,
-unicode font generator,
-text decorator,
-symbol decorator,
-text symbols,
-case converter,
-text repeater,
-emoji converter,
-neon text,
-neon text generator,
-text art,
-message encryption,
-text encryptor,
-offline text tools,
-offline text editor,
-free text styling app,
-ad-free text app
-" />
+<meta name="keywords" content="Renext, Renext app, Renext stylish app, mtRenext, text styling app, stylish text, stylish text generator, font generator, text decorator, text repeater, emoji converter, neon text, message encryption, text encryptor" />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#12101c" />
 <meta property="og:title" content="Renext — The All-in-One Text Styling Toolkit for Android" />
 <meta property="og:description" content="Fonts, symbols, case styles, repeaters, emoji conversion, neon text art, and message encryption — Renext bundles it all into one free, ad-free, fully offline app." />
 <meta property="og:image" content="https://mtfahimme.github.io/renext/asset/preview-10.jpg" />
-<meta property="og:image:secure_url" content="https://mtfahimme.github.io/renext/asset/preview-10.jpg" />
 <meta property="og:image:type" content="image/jpeg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Renext App Preview" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://mtfahimme.github.io/renext/" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -56,6 +24,22 @@ ad-free text app
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://mtfahimme.github.io/renext/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Renext",
+  "alternateName": "Renew your Text",
+  "description": "Renext is a free, ad-free Android text styling toolkit with stylish fonts, symbols, case conversion, text repeater, emoji conversion, neon text art and message encryption. Works fully offline.",
+  "url": "https://mtfahimme.github.io/renext/",
+  "downloadUrl": "https://github.com/mtFAHIMme/renext/releases/latest/download/Renext.apk",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Android",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
 
 <style>
   :root{
@@ -64,8 +48,8 @@ ad-free text app
     --fg:#f5f3ff;
     --muted:#a79ec4;
     --muted-dim:#78708f;
-    --accent:#ffb454;   /* amber — the "stylised" highlight colour */
-    --accent-2:#8b7bf7; /* indigo — secondary / links */
+    --accent:#ffb454;
+    --accent-2:#8b7bf7;
     --card:rgba(255,255,255,0.045);
     --card-solid:#1c1830;
     --border:rgba(255,255,255,0.09);
@@ -88,20 +72,14 @@ ad-free text app
   a{color:inherit;text-decoration:none;}
   .container{width:100%;max-width:1120px;margin:0 auto;padding:0 32px;}
 
-  /* Ambient corner glow, anchored to the viewport (not the document) so it never
-     produces a hard seam partway down a tall page — it just sits behind everything. */
   .bg-glow{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    pointer-events:none;
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
     background:
       radial-gradient(closest-side, rgba(139,123,247,.22), rgba(139,123,247,.22) 35%, transparent 100%) -10% -15% / 70vw 70vw no-repeat,
       radial-gradient(closest-side, rgba(255,180,84,.16), rgba(255,180,84,.16) 35%, transparent 100%) 110% -10% / 60vw 60vw no-repeat,
       var(--bg);
   }
 
-  /* decorative glyph scatter — nods to the app's Board of stylish symbols. Confined to the hero so it never drifts over other sections. */
   .glyphs{position:absolute;inset:0;pointer-events:none;z-index:0;}
   .glyphs span{position:absolute;font-family:var(--mono);color:var(--accent-2);opacity:.12;font-size:26px;user-select:none;}
 
@@ -115,7 +93,6 @@ ad-free text app
 
   main{position:relative;z-index:1;}
 
-  /* ---------- Hero ---------- */
   .hero{padding-top:76px;padding-bottom:40px;position:relative;overflow:hidden;}
   .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;}
   .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;display:flex;align-items:center;gap:10px;}
@@ -127,13 +104,21 @@ ad-free text app
   .sub{font-size:16px;line-height:1.65;color:var(--muted);max-width:520px;margin:0 0 30px;}
   .sub b{color:var(--fg);font-weight:600;}
 
+  .version-note{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:12.5px;color:var(--accent);
+    background:rgba(255,180,84,.10);border:1px solid rgba(255,180,84,.25);
+    padding:7px 13px;border-radius:999px;margin:0 0 16px;width:fit-content;
+  }
+  .version-note[hidden]{display:none;}
+  .version-note::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;}
+
   .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px;}
   .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:12px;border:1px solid var(--border);background:var(--card);font-weight:600;font-size:15px;box-shadow:var(--shadow);transition:transform .2s ease, box-shadow .2s ease;}
   .btn:hover{transform:translateY(-2px);}
   .btn.primary{background:linear-gradient(135deg,var(--accent),#ffcf85);color:#191325;border-color:transparent;}
   .btn.ghost{color:var(--fg);}
   .btn svg{width:18px;height:18px;flex:none;}
-
   .btn.donate-link svg{color:var(--accent);}
 
   .auto-note{display:none;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;color:var(--accent);background:rgba(255,180,84,.10);border:1px solid rgba(255,180,84,.25);padding:8px 12px;border-radius:9px;width:fit-content;margin:-8px 0 22px;}
@@ -144,7 +129,6 @@ ad-free text app
   .badge{display:flex;align-items:center;gap:7px;padding:6px 10px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:12.5px;font-family:var(--mono);}
   .badge i{width:7px;height:7px;border-radius:50%;background:var(--accent-2);}
 
-  /* hero mock phone with live style samples */
   .hero-visual{position:relative;display:flex;justify-content:center;}
   .phone{width:250px;border-radius:34px;background:linear-gradient(160deg,#211c38,#161226);border:1px solid var(--border);box-shadow:var(--shadow);padding:14px;}
   .phone .screen{background:var(--bg);border-radius:22px;padding:20px 16px;min-height:420px;display:flex;flex-direction:column;gap:14px;}
@@ -154,14 +138,12 @@ ad-free text app
   .sample .out{font-size:17px;color:var(--fg);word-break:break-word;}
   .sample.accent .out{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;}
 
-  /* ---------- Sections shared ---------- */
   .section{padding-top:64px;padding-bottom:64px;}
   .section-head{max-width:600px;margin:0 0 36px;}
   .section-head .eyebrow{margin-bottom:12px;}
   .section-head h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,36px);margin:0 0 10px;letter-spacing:-.01em;}
   .section-head p{color:var(--muted);margin:0;font-size:15.5px;line-height:1.6;}
 
-  /* ---------- Features ---------- */
   .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
   .feat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;position:relative;overflow:hidden;transition:border-color .2s ease, transform .2s ease;}
   .feat-card:hover{border-color:color-mix(in srgb, var(--accent-2) 45%, var(--border));transform:translateY(-3px);}
@@ -173,12 +155,21 @@ ad-free text app
   .feat-card.soon{border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;}
   .feat-card.soon .feat-glyph{background:rgba(139,123,247,.12);color:var(--accent-2);}
 
-  /* ---------- Screenshots carousel ---------- */
   .card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);padding:16px;backdrop-filter:blur(10px);}
   .carousel{position:relative;overflow:hidden;border-radius:16px;user-select:none;}
   .track{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1);will-change:transform;touch-action:pan-y;}
   .slide{flex:0 0 100%;padding:8px;display:flex;justify-content:center;}
-  .frame{border-radius:20px;overflow:hidden;background:linear-gradient(150deg,#241f3d,#140f22);border:1px solid var(--border);position:relative;aspect-ratio:9/16;box-shadow:0 12px 40px rgba(0,0,0,.35);max-height:520px;width:100%;margin:0 auto;max-width:280px;}
+  .frame{
+    border-radius:20px;overflow:hidden;
+    background:linear-gradient(150deg,#241f3d,#140f22);
+    border:1px solid var(--border);
+    position:relative;aspect-ratio:9/16;
+    box-shadow:0 14px 46px rgba(0,0,0,.4);
+    width:100%;max-width:360px;margin:0 auto;
+    cursor:zoom-in;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .frame:hover{transform:translateY(-3px);border-color:color-mix(in srgb, var(--accent-2) 45%, var(--border));box-shadow:0 20px 56px rgba(0,0,0,.5);}
   .frame img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;}
   .frame .placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--muted);font-family:var(--mono);font-size:12.5px;text-align:center;padding:24px;line-height:1.6;background:repeating-linear-gradient(135deg, rgba(255,255,255,.03) 0 10px, transparent 10px 20px);}
   .frame .placeholder b{color:var(--accent);font-size:26px;}
@@ -196,7 +187,109 @@ ad-free text app
   .kbd{font-family:var(--mono);border:1px solid var(--border);padding:3px 7px;border-radius:6px;background:var(--card);font-size:11.5px;color:var(--muted);}
   .tip{text-align:center;margin-top:12px;color:var(--muted-dim);font-size:12.5px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;}
 
-  /* ---------- About / Support ---------- */
+  /* =====================================================
+     LIGHTBOX — track-based like the carousel above, so
+     adjacent slides are literally beside each other and
+     there is never a blank gap during a swap.
+     ===================================================== */
+  .lightbox{
+    position:fixed;
+    inset:0;
+    z-index:200;
+    background:rgba(6,4,12,.96);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .22s ease;
+    overscroll-behavior:contain;
+  }
+  .lightbox.open{opacity:1;pointer-events:auto;}
+
+  .lb-bg{
+    position:absolute;inset:-60px;
+    background-size:cover;
+    background-position:center;
+    filter:blur(80px) saturate(1.4) brightness(.6);
+    opacity:.5;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  .lb-viewport{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    z-index:1;
+    touch-action:none;
+  }
+  .lb-track{
+    display:flex;
+    height:100%;
+    width:100%;
+    transition:transform .32s cubic-bezier(.4,0,.2,1);
+    will-change:transform;
+  }
+  .lb-slide{
+    flex:0 0 100%;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    /* Asymmetric padding: a bit more room at bottom for the count
+       pill, and enough at the sides so the nav arrows never sit on
+       top of the screenshot content. */
+    padding:14px 56px 44px;
+    box-sizing:border-box;
+  }
+  .lb-slide img{
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    display:block;
+    border-radius:14px;
+    border:1px solid var(--border);
+    box-shadow:0 30px 90px rgba(0,0,0,.75);
+    user-select:none;
+    -webkit-user-drag:none;
+    object-fit:contain;
+  }
+
+  .lb-close{
+    position:absolute;top:14px;right:14px;
+    width:42px;height:42px;border-radius:12px;
+    background:rgba(20,16,32,.72);border:1px solid var(--border);
+    color:var(--fg);font-size:23px;line-height:1;
+    display:grid;place-items:center;cursor:pointer;
+    backdrop-filter:blur(10px);
+    transition:background .2s ease, transform .2s ease;
+    z-index:3;
+  }
+  .lb-close:hover{background:rgba(255,255,255,.14);transform:scale(1.06);}
+
+  .lb-nav{
+    position:absolute;top:50%;translate:0 -50%;
+    width:42px;height:42px;border-radius:12px;
+    background:rgba(20,16,32,.72);border:1px solid var(--border);
+    color:var(--fg);display:grid;place-items:center;cursor:pointer;
+    backdrop-filter:blur(10px);
+    transition:background .2s ease, transform .2s ease, opacity .2s ease;
+    z-index:3;
+  }
+  .lb-nav:hover{background:rgba(255,255,255,.14);transform:translateY(-50%) scale(1.06);}
+  .lb-nav svg{width:20px;height:20px;}
+  .lb-nav[disabled]{opacity:.28;cursor:default;pointer-events:none;}
+  .lb-prev{left:10px;} .lb-next{right:10px;}
+
+  .lb-count{
+    position:absolute;bottom:14px;left:50%;translate:-50% 0;
+    font-family:var(--mono);font-size:12px;color:var(--muted);
+    background:rgba(20,16,32,.75);border:1px solid var(--border);
+    padding:5px 12px;border-radius:999px;
+    backdrop-filter:blur(10px);
+    z-index:3;
+  }
+
   .split{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   .info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;}
   .info-card h3{font-family:var(--display);font-size:18px;margin:0 0 12px;font-weight:700;}
@@ -230,13 +323,19 @@ ad-free text app
     .feat-grid{grid-template-columns:1fr;}
     .hero{padding-top:60px;padding-bottom:28px;}
     .section{padding-top:64px;padding-bottom:48px;}
-    .frame{height:56vh;min-height:380px;max-height:none;}
     .feat-card{padding:20px;}
     .info-card{padding:22px;}
+
+    .lb-slide{padding:64px 12px 56px;}
+    .lb-close{top:12px;right:12px;width:38px;height:38px;font-size:20px;border-radius:10px;}
+    .lb-nav{width:34px;height:34px;border-radius:9px;}
+    .lb-nav svg{width:16px;height:16px;}
+    .lb-prev{left:6px;} .lb-next{right:6px;}
+    .lb-count{bottom:12px;font-size:11px;padding:4px 10px;}
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    .btn,.feat-card,.dot,.navbtn,.track{transition:none;}
+    .btn,.feat-card,.dot,.navbtn,.track,.frame,.lb-track{transition:none;}
   }
   @media (max-height:500px) and (orientation:landscape){
     .nav{min-height:52px;padding-top:10px;padding-bottom:10px;}
@@ -271,14 +370,15 @@ ad-free text app
         <h1 class="wordmark"><span class="cycle" id="cycleWord">Renext</span></h1>
         <p class="h1-static">Type once. Style it a hundred ways.</p>
         <p class="sub">Renext is a simple, powerful text styling tool for <b>social media, messages, and more</b> — fonts, symbol decorations, repeaters, neon graphics and a text encryptor, all in one lightweight app.</p>
+
+        <p class="version-note" id="versionNote" hidden>Version: <span id="versionText"></span></p>
+
         <div class="cta">
-          <a class="btn primary" id="downloadBtn" href="https://mtfahimme.github.io/renext/asset/Renext.apk" download>
+          <a class="btn primary" id="downloadBtn" href="https://github.com/mtFAHIMme/renext/releases/latest/download/Renext.apk" download>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1 1 0 0 1 1 1v9.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4A1 1 0 0 1 8.293 11.293L10.586 13.586V4a1 1 0 0 1 1-1Zm-8 14a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z"/></svg>
             <span>Download APK</span>
           </a>
-          <a class="btn ghost" href="#screens">
-            <span>See screenshots</span>
-          </a>
+          <a class="btn ghost" href="#screens"><span>See screenshots</span></a>
           <a class="btn ghost donate-link" href="donate.html">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.716-4.35-9.428-8.06C.86 10.42 1.2 6.9 4.1 5.2A5.4 5.4 0 0 1 12 7.02 5.4 5.4 0 0 1 19.9 5.2c2.9 1.7 3.24 5.22 1.53 7.74C18.716 16.65 12 21 12 21Z"/></svg>
             <span>Donate</span>
@@ -299,26 +399,11 @@ ad-free text app
         <div class="phone">
           <div class="screen">
             <div class="app-row"><span>Styler</span><span>Font</span></div>
-            <div class="sample">
-              <div class="label">Input</div>
-              <div class="out">Good vibes only</div>
-            </div>
-            <div class="sample accent">
-              <div class="label">Fraktur</div>
-              <div class="out">𝕲𝖔𝖔𝖉 𝖛𝖎𝖇𝖊𝖘 𝖔𝖓𝖑𝖞</div>
-            </div>
-            <div class="sample">
-              <div class="label">Decorated</div>
-              <div class="out">彡Good vibes only彡</div>
-            </div>
-            <div class="sample">
-              <div class="label">Circled</div>
-              <div class="out">Ⓖⓞⓞⓓ ⓥⓘⓑⓔⓢ ⓞⓝⓛⓨ</div>
-            </div>
-            <div class="sample accent">
-              <div class="label">Repeater</div>
-              <div class="out">G~o~o~d</div>
-            </div>
+            <div class="sample"><div class="label">Input</div><div class="out">Good vibes only</div></div>
+            <div class="sample accent"><div class="label">Fraktur</div><div class="out">𝕲𝖔𝖔𝖉 𝖛𝖎𝖇𝖊𝖘 𝖔𝖓𝖑𝖞</div></div>
+            <div class="sample"><div class="label">Decorated</div><div class="out">彡Good vibes only彡</div></div>
+            <div class="sample"><div class="label">Circled</div><div class="out">Ⓖⓞⓞⓓ ⓥⓘⓑⓔⓢ ⓞⓝⓛⓨ</div></div>
+            <div class="sample accent"><div class="label">Repeater</div><div class="out">G~o~o~d</div></div>
           </div>
         </div>
       </div>
@@ -337,9 +422,7 @@ ad-free text app
         <div class="feat-glyph">𝕬</div>
         <h3>Styler</h3>
         <p>Transform your text with case conversion, prefix/suffix decorations, a symbol board, and dozens of unicode fonts.</p>
-        <div class="chips">
-          <span class="chip">Case</span><span class="chip">Decorations</span><span class="chip">Board</span><span class="chip">Font</span>
-        </div>
+        <div class="chips"><span class="chip">Case</span><span class="chip">Decorations</span><span class="chip">Board</span><span class="chip">Font</span></div>
       </div>
       <div class="feat-card">
         <div class="feat-glyph">↻</div>
@@ -360,6 +443,7 @@ ad-free text app
         <div class="feat-glyph">⚿</div>
         <h3>Encryptor</h3>
         <p>Encrypt and decrypt text for messages you'd rather keep private.</p>
+        <div class="chips"><span class="chip">Base64</span><span class="chip">AES-256-GCM</span></div>
       </div>
       <div class="feat-card soon">
         <div class="feat-glyph">＋</div>
@@ -374,7 +458,7 @@ ad-free text app
     <div class="section-head">
       <p class="eyebrow">See it in action</p>
       <h2>A quick look at Renext</h2>
-      <p>Live screenshots from the app.</p>
+      <p>Live screenshots from the app — tap any screenshot to view it larger.</p>
     </div>
     <div class="card">
       <div class="carousel" id="carousel" aria-roledescription="carousel" aria-label="App screenshots">
@@ -396,18 +480,17 @@ ad-free text app
     <div class="section-head">
       <p class="eyebrow">Support &amp; info</p>
       <h2>About Renext</h2>
-      <p>What the app does, and how you can help keep it free.</p>
+      <p>Why the app exists, and how you can help keep it free.</p>
     </div>
     <div class="split">
       <div class="info-card">
-        <h3>What it does</h3>
-        <p><b>Renext</b> — short for <b>“Renew your Text”</b> — is a simple and powerful text styling toolkit designed to give your everyday text a fresh new look. Style, decorate, transform, or protect your text for social media, messages, and more.</p>
+        <h3>Why Renext</h3>
+        <p><b>Renext</b> (short for <b>“Renew your Text”</b>) is built to be simple, private, and genuinely useful — no ads, no tracking, and no internet connection required.</p>
         <ul>
-          <li>Multiple text styles</li>
-          <li>Fast and lightweight</li>
-          <li>Easy-to-use interface</li>
-          <li>No ads, no tracking</li>
+          <li>Free to use, forever</li>
+          <li>No ads or tracking</li>
           <li>Works fully offline</li>
+          <li>Lightweight and fast</li>
         </ul>
       </div>
       <div class="info-card">
@@ -428,60 +511,74 @@ ad-free text app
     <div>© <span id="year"></span> Renext. All rights reserved.</div>
     <div style="display:flex;gap:12px;align-items:center;">
       <a href="mailto:mt.fahim@outlook.com" class="pill">Contact</a>
-      <a href="privacy.html" class="pill">Privacy</a>
+      <a href="privacy-policy.html" class="pill">Privacy Policy</a>
     </div>
   </div>
 </footer>
 
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <div class="lb-bg" id="lbBg" aria-hidden="true"></div>
+  <button class="lb-close" id="lbClose" aria-label="Close viewer">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous screenshot">
+    <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next screenshot">
+    <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
+  <div class="lb-viewport" id="lbViewport">
+    <div class="lb-track" id="lbTrack"></div>
+  </div>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ---------- Auto-download when opened from the app ----------
-   Link the app's "Download update" action to:
-     https://mtfahimme.github.io/renext/?download=1
-   (or use "#download" instead of the query param — both work.)
-   On load, if that flag is present, the page auto-clicks the
-   Download APK button so the download starts immediately. */
+/* Disable browser scroll restoration so our own lightbox scroll
+   handling is never fighting the browser. */
+if ('scrollRestoration' in history) {
+  try { history.scrollRestoration = 'manual'; } catch(e) {}
+}
+
+/* ---------- Auto-download ---------- */
 (function(){
   const params = new URLSearchParams(window.location.search);
   const shouldAutoDownload = params.get('download') === '1' || window.location.hash === '#download';
   if(!shouldAutoDownload) return;
-
   const btn = document.getElementById('downloadBtn');
   const note = document.getElementById('autoDownloadNote');
   if(!btn) return;
-
   setTimeout(() => {
     btn.click();
     if(note) note.classList.add('show');
   }, 400);
 })();
 
-/* ---------- Download button with version ---------- */
+/* ---------- Version badge ---------- */
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("downloadBtn");
-  if (!btn) return;
-
-  const span = btn.querySelector("span"); // <span>Download APK</span>
-  if (!span) return;
-
+  const note = document.getElementById("versionNote");
+  const noteText = document.getElementById("versionText");
+  if (!note || !noteText) return;
   fetch("https://mtfahimme.github.io/renext/update.json")
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to load");
-      return res.json();
-    })
+    .then(res => { if (!res.ok) throw new Error("Failed to load"); return res.json(); })
     .then(data => {
-      if (data.version_name) {
-        span.textContent = `Download APK (v${data.version_name})`;
+      if (!data) return;
+      const name = data.version_name;
+      const code = data.version_code;
+      if (!name && (code === undefined || code === null || code === "")) return;
+      let label = "";
+      if (name) label += name;
+      if (code !== undefined && code !== null && code !== "") {
+        label += (label ? " " : "") + `(${code})`;
       }
-      // If version_name is not present, "Download APK" will be retained.
+      noteText.textContent = label;
+      note.hidden = false;
     })
-    .catch(() => {
-      // If the fetch fails for any reason, the current text remains unchanged.
-    });
+    .catch(() => {});
 });
 
-/* ---------- Hero cycling wordmark (mirrors the app's Font feature) ---------- */
+/* ---------- Hero cycling wordmark ---------- */
 (function(){
   const styles = ['Renext','𝐑𝐞𝐧𝐞𝐱𝐭','𝑅𝑒𝑛𝑒𝑥𝑡','𝓡𝓮𝓷𝓮𝔁𝓽','𝕽𝖊𝖓𝖊𝖝𝖙','Ｒｅｎｅｘｔ','Ⓡⓔⓝⓔⓧⓣ','𝚁𝚎𝚗𝚎𝚡𝚝'];
   const el = document.getElementById('cycleWord');
@@ -498,9 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 2200);
 })();
 
-/* ---------- Screenshot carousel ---------- */
-/* To add more screenshots later, just extend this array —
-   everything else (slides, dots, nav) builds itself. */
+/* ---------- Screenshot carousel + lightbox ---------- */
 (function(){
   const SCREENSHOTS = [
     { src: 'asset/screenshots/home.jpg', alt: 'Renext – Home screen' },
@@ -518,10 +613,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const carousel = document.getElementById('carousel');
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  const lightbox   = document.getElementById('lightbox');
+  const lbBg       = document.getElementById('lbBg');
+  const lbCount    = document.getElementById('lbCount');
+  const lbClose    = document.getElementById('lbClose');
+  const lbPrev     = document.getElementById('lbPrev');
+  const lbNext     = document.getElementById('lbNext');
+  const lbViewport = document.getElementById('lbViewport');
+  const lbTrack    = document.getElementById('lbTrack');
+
+  /* ----- build the small carousel ----- */
   SCREENSHOTS.forEach((shot, i) => {
     const slide = document.createElement('div');
     slide.className = 'slide';
-    slide.innerHTML = `<div class="frame">
+    slide.innerHTML = `<div class="frame" data-index="${i}" role="button" tabindex="0" aria-label="Open ${shot.alt} larger">
         <img loading="${i === 0 ? 'eager' : 'lazy'}" src="${shot.src}" alt="${shot.alt}" draggable="false"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="placeholder" style="display:none;"><b>▤</b>Add <code>${shot.src}</code><br>to show this screenshot</div>
@@ -534,6 +639,30 @@ document.addEventListener("DOMContentLoaded", () => {
     dot.setAttribute('aria-label','Go to slide ' + (i + 1));
     dot.addEventListener('click', () => go(i));
     dotsWrap.appendChild(dot);
+
+    const frame = slide.querySelector('.frame');
+    frame.addEventListener('click', () => {
+      if (moved) return;
+      const img = frame.querySelector('img');
+      if (!img || img.style.display === 'none') return;
+      openLightbox(i);
+    });
+    frame.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
+    });
+  });
+
+  /* ----- build the lightbox slides (all preloaded in a track) ----- */
+  SCREENSHOTS.forEach((shot) => {
+    const s = document.createElement('div');
+    s.className = 'lb-slide';
+    const img = document.createElement('img');
+    img.src = shot.src;
+    img.alt = shot.alt;
+    img.draggable = false;
+    img.loading = 'eager';
+    s.appendChild(img);
+    lbTrack.appendChild(s);
   });
 
   const slides = Array.from(track.children);
@@ -567,6 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  /* ----- drag on the small carousel ----- */
   let startX = 0, startY = 0, dx = 0, dy = 0, dragging = false, moved = false;
   function onStart(e){
     dragging = true; moved = false;
@@ -592,7 +722,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const threshold = window.innerWidth * 0.15;
     if(moved && Math.abs(dx) > threshold){ dx > 0 ? prevSlide() : nextSlide(); }
     else{ update(); }
-    dx = 0; dy = 0; moved = false;
+    dx = 0; dy = 0;
     if(!prefersReduced) startAuto();
   }
   carousel.addEventListener('mousedown', onStart);
@@ -608,16 +738,252 @@ document.addEventListener("DOMContentLoaded", () => {
   function restartAuto(){ stopAuto(); setTimeout(startAuto, 1000); }
 
   carousel.addEventListener('mouseenter', stopAuto);
-  carousel.addEventListener('mouseleave', () => !prefersReduced && startAuto());
+  carousel.addEventListener('mouseleave', () => { if(!lightbox.classList.contains('open') && !prefersReduced) startAuto(); });
   carousel.addEventListener('focusin', stopAuto);
-  carousel.addEventListener('focusout', () => !prefersReduced && startAuto());
+  carousel.addEventListener('focusout', () => { if(!lightbox.classList.contains('open') && !prefersReduced) startAuto(); });
 
   if('IntersectionObserver' in window){
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { entry.isIntersecting ? (!prefersReduced && startAuto()) : stopAuto(); });
+      entries.forEach(entry => {
+        if(lightbox.classList.contains('open')) return;
+        entry.isIntersecting ? (!prefersReduced && startAuto()) : stopAuto();
+      });
     }, { threshold: 0.5 });
     observer.observe(carousel);
   } else if(!prefersReduced){ startAuto(); }
+
+  /* ============================================================
+     LIGHTBOX  —  track-based. Adjacent slides sit right next to
+     each other, so dragging reveals the neighbour directly with
+     no blank gap. Scroll is locked on <html> only and the saved
+     scroll offset is reapplied instantly (never animated).
+     ============================================================ */
+
+  let lbIndex = 0;
+  let lbWidth = 0;
+  let lbHistoryPushed = false;
+  let lbSwapping = false;
+
+  /* ---- scroll lock: html only, with instant restoration ---- */
+  let savedScrollY = 0;
+  let scrollLocked = false;
+  let padRestore = null;
+
+  function lockBodyScroll(){
+    if(scrollLocked) return;
+    savedScrollY = window.scrollY || window.pageYOffset || 0;
+    const pad = window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.style.overflow = 'hidden';
+    if(pad > 0){
+      document.body.style.paddingRight = pad + 'px';
+      padRestore = pad;
+    }
+    scrollLocked = true;
+  }
+  function unlockBodyScroll(){
+    if(!scrollLocked) return;
+    document.documentElement.style.overflow = '';
+    document.body.style.paddingRight = '';
+    padRestore = null;
+    scrollLocked = false;
+
+    /* Reapply scroll position instantly — temporarily disable
+       `scroll-behavior: smooth` so the browser does not animate. */
+    const html = document.documentElement;
+    const prevBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, savedScrollY);
+    /* Restore after layout settles (one frame is enough). */
+    requestAnimationFrame(() => {
+      html.style.scrollBehavior = prevBehavior;
+    });
+  }
+
+  /* ---- lightbox track sizing / positioning ---- */
+  function measureLb(){
+    lbWidth = lbViewport.clientWidth || window.innerWidth;
+  }
+  function lbApply(animate){
+    lbTrack.style.transition = animate ? '' : 'none';
+    lbTrack.style.transform = `translateX(${-lbIndex * lbWidth}px)`;
+    if(!animate) void lbTrack.offsetWidth; /* force reflow */
+  }
+  function lbUpdateChrome(){
+    const shot = SCREENSHOTS[lbIndex];
+    if(!shot) return;
+    lbBg.style.backgroundImage = `url("${shot.src}")`;
+    lbCount.textContent = (lbIndex + 1) + ' / ' + SCREENSHOTS.length;
+    lbPrev.disabled = lbIndex === 0;
+    lbNext.disabled = lbIndex === SCREENSHOTS.length - 1;
+  }
+  function lbSetIndex(i, animate){
+    lbIndex = Math.max(0, Math.min(SCREENSHOTS.length - 1, i));
+    lbApply(animate);
+    lbUpdateChrome();
+  }
+  function lbGo(i){
+    if(lbSwapping) return;
+    lbSetIndex(i, true);
+  }
+
+  /* ---- open / close ---- */
+  function openLightbox(i){
+    if(!SCREENSHOTS.length) return;
+    lbIndex = Math.max(0, Math.min(SCREENSHOTS.length - 1, i));
+    measureLb();
+    lbApply(false);
+    lbUpdateChrome();
+    lockBodyScroll();
+    lightbox.classList.add('open');
+    stopAuto();
+
+    /* Push a history entry so the hardware/software back button
+       closes the lightbox instead of leaving the page. */
+    if(!lbHistoryPushed){
+      try {
+        history.pushState({ lb: true }, '');
+        lbHistoryPushed = true;
+      } catch(e) {}
+    }
+    lbClose.focus({ preventScroll: true });
+  }
+  function doCloseLightbox(){
+    lbHistoryPushed = false;
+    lightbox.classList.remove('open');
+    unlockBodyScroll();
+    if(!prefersReduced) startAuto();
+  }
+  function closeLightbox(){
+    if(lbHistoryPushed){
+      /* Let popstate do the actual closing so the history entry
+         is properly consumed. */
+      history.back();
+    } else {
+      doCloseLightbox();
+    }
+  }
+  window.addEventListener('popstate', () => {
+    if(lightbox.classList.contains('open')){
+      doCloseLightbox();
+    }
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', () => lbGo(lbIndex - 1));
+  lbNext.addEventListener('click', () => lbGo(lbIndex + 1));
+
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape'){ e.preventDefault(); closeLightbox(); }
+    if(e.key === 'ArrowRight'){ e.preventDefault(); lbGo(lbIndex + 1); }
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); lbGo(lbIndex - 1); }
+  });
+
+  /* ---- drag on the lightbox track (follow the finger) ---- */
+  let lbDragging = false;
+  let lbStartX = 0, lbStartY = 0;
+  let lbCurrentX = 0;
+  let lbAxisLocked = false;
+  let lbAxis = null; /* 'x' or 'y' */
+
+  function lbDragStart(clientX, clientY){
+    if(lbSwapping) return;
+    measureLb();
+    lbDragging = true;
+    lbAxisLocked = false;
+    lbAxis = null;
+    lbStartX = clientX;
+    lbStartY = clientY;
+    lbCurrentX = 0;
+    lbTrack.style.transition = 'none';
+  }
+  function lbDragMove(clientX, clientY){
+    if(!lbDragging) return;
+    const dX = clientX - lbStartX;
+    const dY = clientY - lbStartY;
+
+    if(!lbAxisLocked){
+      if(Math.abs(dX) > 8 || Math.abs(dY) > 8){
+        lbAxisLocked = true;
+        lbAxis = Math.abs(dX) > Math.abs(dY) ? 'x' : 'y';
+        if(lbAxis === 'y'){
+          /* Vertical gesture — let the user scroll the page
+             normally (though we've locked scroll behind). Just
+             cancel the drag. */
+          lbDragging = false;
+          lbTrack.style.transition = '';
+          lbApply(false);
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+
+    let delta = dX;
+    /* Rubber-band at the ends so it feels physical. */
+    if(lbIndex === 0 && delta > 0) delta = delta * 0.35;
+    if(lbIndex === SCREENSHOTS.length - 1 && delta < 0) delta = delta * 0.35;
+
+    lbCurrentX = delta;
+    lbTrack.style.transform = `translateX(${-lbIndex * lbWidth + delta}px)`;
+  }
+  function lbDragEnd(){
+    if(!lbDragging) return;
+    lbDragging = false;
+
+    const threshold = lbWidth * 0.18;
+    let newIndex = lbIndex;
+    if(lbCurrentX > threshold && lbIndex > 0){
+      newIndex = lbIndex - 1;
+    } else if(lbCurrentX < -threshold && lbIndex < SCREENSHOTS.length - 1){
+      newIndex = lbIndex + 1;
+    }
+    lbCurrentX = 0;
+    lbSetIndex(newIndex, true);
+  }
+
+  /* touch */
+  lbViewport.addEventListener('touchstart', (e) => {
+    if(e.target.closest('.lb-close, .lb-nav')) return;
+    const t = e.touches[0];
+    lbDragStart(t.clientX, t.clientY);
+  }, { passive: true });
+  lbViewport.addEventListener('touchmove', (e) => {
+    if(!lbDragging) return;
+    const t = e.touches[0];
+    lbDragMove(t.clientX, t.clientY);
+    if(lbAxis === 'x' && e.cancelable) e.preventDefault();
+  }, { passive: false });
+  lbViewport.addEventListener('touchend', () => { lbDragEnd(); });
+  lbViewport.addEventListener('touchcancel', () => { lbDragEnd(); });
+
+  /* mouse drag (desktop) */
+  lbViewport.addEventListener('mousedown', (e) => {
+    if(e.target.closest('.lb-close, .lb-nav')) return;
+    e.preventDefault();
+    lbDragStart(e.clientX, e.clientY);
+  });
+  document.addEventListener('mousemove', (e) => {
+    if(!lbDragging) return;
+    lbDragMove(e.clientX, e.clientY);
+  });
+  document.addEventListener('mouseup', () => { lbDragEnd(); });
+
+  /* prevent native image dragging / context menu inside lightbox */
+  lbTrack.addEventListener('dragstart', (e) => e.preventDefault());
+  lbTrack.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  /* keep the track in sync on resize */
+  window.addEventListener('resize', () => {
+    if(!lightbox.classList.contains('open')) return;
+    measureLb();
+    lbApply(false);
+  });
 
   update();
 })();
