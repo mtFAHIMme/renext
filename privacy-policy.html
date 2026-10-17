@@ -115,7 +115,7 @@
       <span>Effective: August 8, 2026</span>
       <span>Applies to: Renext for Android</span>
     </div>
-    <p class="lede">The short version: <b>Renext does not collect, store, or transmit any of your data.</b> Everything you type stays on your device. This page explains exactly what that means, and the one narrow purpose for which the app connects to the internet at all.</p>
+    <p class="lede">The short version: <b>Renext does not collect, store, or transmit any of your data.</b> Everything you type stays on your device. This page explains exactly what that means, and the two narrow purpose for which the app connects to the internet at all.</p>
   </section>
 
   <section class="section container">
@@ -123,7 +123,7 @@
 
       <div class="policy-card highlight">
         <p class="num">SUMMARY</p>
-        <h2>Renext is a fully offline, data-free app</h2>
+        <h2>Renext is a data-free app; every tool works fully offline</h2>
         <ul>
           <li>Renext does <b>not</b> collect any personal or usage data.</li>
           <li>Renext does <b>not</b> process the text you type in any way beyond displaying it back to you, styled.</li>
@@ -148,18 +148,24 @@
       <div class="policy-card">
         <p class="num">03 — WHY RENEXT ASKS FOR INTERNET ACCESS</p>
         <h2>Internet permission: what it's actually used for</h2>
-        <p>Renext requests the Android <code>INTERNET</code> permission for exactly two purposes, and nothing else:</p>
+        <p>Renext's text-styling tools — Styler, Repeater, Text to Emoji, Neon Text, and Encryptor — all run entirely on your device and <b>work fully without any internet connection</b>. The Android <code>INTERNET</code> permission is requested for only these two non-essential, unrelated tasks:</p>
         <ul>
-          <li><b>Checking for app updates</b> — so the app can let you know when a newer version is available.</li>
+          <li><b>Checking for app updates</b> — by reading a small <code>update.json</code> file from GitHub Pages to see if a newer version exists.</li>
           <li><b>Loading the developer's profile picture</b> shown on the About screen, fetched from GitHub using the Glide image-loading library.</li>
         </ul>
-        <p>This permission is never used to send your text, your device identifiers, or any other personal data anywhere. If you'd prefer, you can revoke internet access for Renext in your device settings — the core text-styling features will continue to work normally offline.</p>
+        <p>This permission is never used to send your text, your device identifiers, or any other personal data anywhere. If you revoke internet access for Renext in your device settings, <b>every tool will continue to work normally</b> — you simply won't get update notifications or see the developer's profile picture.</p>
       </div>
 
       <div class="policy-card">
         <p class="num">04 — THIRD-PARTY SERVICES</p>
-        <h2>GitHub (image loading only)</h2>
-        <p>The only external service Renext ever contacts is GitHub, solely to load the developer's profile image. Like any standard web request, this may cause GitHub's own servers to see basic technical information inherent to how the internet works (such as your IP address and request timestamp) — this is standard for any request made over HTTP, and Renext has no control over, and does not access, any data GitHub logs on its end. Renext does not integrate any advertising network, analytics SDK, or other third-party service.</p>
+        <h2>GitHub (update check and image loading only)</h2>
+        <p>The only external service Renext ever contacts is <b>GitHub</b> (including GitHub Pages), for exactly two things:</p>
+        <ul>
+          <li><b>Checking for updates</b> — the app downloads a small <code>update.json</code> manifest hosted on GitHub Pages to see whether a newer version exists. That file only contains the app's version number and download link; it contains nothing about you.</li>
+          <li><b>Loading the developer's profile picture</b> on the About screen, fetched from GitHub using the Glide image-loading library.</li>
+        </ul>
+        <p>These are plain, anonymous file requests. Aside from the basic technical information inherent to how the internet works — such as your IP address and request timestamp, which GitHub's servers may see, as with any HTTP request — Renext attaches <b>no identifier, account, device information, or usage data</b> to either request. Renext has no control over, and does not access, anything GitHub logs on its own end.</p>
+        <p>Renext does not integrate any advertising network, analytics SDK, crash reporter, or other third-party service.</p>
       </div>
 
       <div class="policy-card">
