@@ -8,16 +8,5 @@
             "IN"
         ],
         "show": false
-    },
-    "more_apps": [
-        {
-            "app_name": "Privon",
-            "package_name": "mt.fahim.privon",
-            "icon_url": "https://mtfahimme.github.io/privon/asset/app_icon.png",
-            "description": "Privon is a free, ad-free, fully offline file encryption tool for Android.\n\nEncrypt and decrypt your files entirely on-device using AES-256-GCM with PBKDF2 key derivation — nothing is ever uploaded, because there is no internet permission to upload with.\n\nFEATURES\n- AES-256-GCM authenticated encryption (confidentiality + integrity in one pass)\n- PBKDF2 with 600,000 iterations for strong key stretching\n- Unique 256-bit salt and 96-bit nonce per file — even in large batches\n- Zero manifest permissions: no internet, no storage, no ads, no tracking\n- Batch encryption and decryption via Android Storage Access Framework (SAF)\n- Runs on Android 5 (API 21) and up\n\nHOW IT WORKS\n- Pick one file or many through Android's system file picker\n- Enter a password — it is stretched into a 256-bit key locally\n- Each file is sealed with its own salt & nonce and written back to the folder you choose\n- Decryption reverses the process exactly, verifying integrity on the way\n\nIMPORTANT\nBecause Privon never sends anything anywhere, there is no recovery service, no reset link, and no backup of your password. If you lose it, files encrypted with it cannot be recovered — by anyone. That trade-off is what makes the app private.",
-            "url": "https://mtfahimme.github.io/privon/",
-            "is_new": true,
-            "show": false
-        }
-    ]
+    }
 }
